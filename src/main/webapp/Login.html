@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - DonateEase</title>
+    <title>Login - DonateEase</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -54,8 +58,12 @@
         }
 
         .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 80vh;
             text-align: center;
-            padding: 2rem;
         }
 
         .content h2 {
@@ -69,16 +77,31 @@
             color: #555;
         }
 
-        .content a {
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            font-size: 1rem;
+        .login-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: left;
         }
 
-        .content a:hover {
+        .login-form input {
+            width: 100%;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .login-form input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .login-form input[type="submit"]:hover {
             background-color: #45a049;
         }
 
@@ -95,21 +118,21 @@
 </head>
 <body>
     <header>
-        <h1>Welcome to DonateEase</h1>
+        <h1>Login to DonateEase</h1>
     </header>
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Donate</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="Login.html">Login</a></li>
-        </ul>
-    </nav>
     <div class="content">
-        <h2>Make a Difference Today</h2>
-        <p>DonateEase is your platform to connect donors with those in need. Join us to bring positive change to the world!</p>
-        <a href="register.html">Get Started</a>
+        <h2>Welcome Back!</h2>
+        <p>Enter your credentials to login and make a difference.</p>
+        <form action="doLogin.jsp" method="POST" class="login-form">
+            <label for="Username">Username:</label>
+            <input type="text" id="Username" name="Username" required><br>
+
+            <label for="Password">Password:</label>
+            <input type="password" id="Password" name="Password" required><br>
+
+            <input type="submit" value="Login">
+        </form>
+        <p>Don't have an account? <a href="Register.html">Register here</a></p>
     </div>
     <footer>
         <p>&copy; 2025 DonateEase. All Rights Reserved.</p>

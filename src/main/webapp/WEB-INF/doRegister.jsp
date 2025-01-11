@@ -13,10 +13,16 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <form action="doLogin.jsp" method="POST"> 
+        <form action="doRegister.jsp" method="POST"> 
+            First Name:<input tpye="text" name="Firstname"><br>
+            Last Name:<input tpye="text" name="Lastname "><br>
             Username:<input tpye="text" name="Username"><br>
             Password:<input tpye="Password" name="Password"><br>
-            <input type="submit"value="Login">
+            First Name:<input tpye="text" name="email"><br>
+            Last Name:<input tpye="text" name="phone "><br>
+            Username:<input tpye="text" name="District"><br>
+            Password:<input tpye="Password" name="Area"><br>
+            <input type="submit"value="Register">
         </form>
     </body>
 </html>
