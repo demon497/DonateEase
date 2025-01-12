@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/DonateEase11"/>
+<Context path="/DonateEase11">
+    <Resource name="jdbc/donateease" auth="Container" type="javax.sql.DataSource"
+              maxTotal="20" maxIdle="10" maxWaitMillis="10000"
+              username="root" password=""
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/donateease"/>
+</Context>

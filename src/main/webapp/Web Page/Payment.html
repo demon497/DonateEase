@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Gateway</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            display: block;
+        }
+
+        nav ul li a:hover {
+            background-color: #575757;
+        }
+
+        .content {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #555;
+        }
+
+        .content button {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1.2rem;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .content button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #4CAF50;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .status-container {
+            display: none;
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .status-container h2 {
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .status-container p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+    </style>
+    <script src="https://khalti.com/static/khalti-checkout.js"></script>
+</head>
+<body>
+
+<header>
+    <h1>Donation Payment</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
+
+<div class="content">
+    <h2>Make a Payment</h2>
+    <p>Click the button below to make a donation payment.</p>
+
+    <!-- Khalti Checkout Button -->
+    <button id="payment-button" aria-label="Pay with Khalti">Pay with Khalti</button>
+</div>
+
+<div class="status-container" id="status-container">
+    <h2 id="payment-status"></h2>
+    <p>Thank you for your donation!</p>
+</div>
+
+<footer>
+    <p>&copy; 2025 Donation System. All rights reserved.</p>
+</footer>
+
+<script>
+    var config = {
+        "publicKey": "YOUR_PUBLIC_KEY",  // Replace with your Khalti public key
+        "productIdentity": "1234567890",
+        "productName": "Donation",
+        "productUrl": "http://example.com",
+        "paymentPreference": ["KHALTI"],
+        "eventHandler": {
+            onSuccess: function (payload) {
+                // Display payment status on the page
+                document.getElementById("payment-status").textContent = "Payment Successful! Token: " + payload.token;
+                document.getElementById("status-container").style.display = "block";
+
+                // Optionally send token and amount to your backend for verification
+                fetch('/verify_payment', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `token=${payload.token}&amount=${payload.amount}`
+                })
+                .then(response => response.text())
+                .then(data => {
+                    console.log('Backend Response:', data);
+                })
+                .catch(error => console.error('Error:', error));
+            },
+            onError: function (error) {
+                document.getElementById("payment-status").textContent = "Payment Error: " + error;
+                document.getElementById("status-container").style.display = "block";
+            },
+            onClose: function () {
+                console.log('Widget closed');
+            }
+        }
+    };
+
+    var checkout = new KhaltiCheckout(config);
+    document.getElementById("payment-button").onclick = function () {
+        checkout.show({amount: 10000}); // Amount in paisa (100 = 10000 paisa)
+    };
+</script>
+
+</body>
+</html>

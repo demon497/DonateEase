@@ -2,7 +2,7 @@
 <%
     String dbURL = "jdbc:mysql://localhost:3306/donateease";
     String dbUser = "root"; // Replace with your MySQL username
-    String dbPassword = "password"; // Replace with your MySQL password
+    String dbPassword = "root"; // Replace with your MySQL password
 
     Connection conn = null;
 
